@@ -8,6 +8,10 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
     app.kubernetes.io/component: cluster_manager
+  annotations:
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 4 }}
+    {{- end }}
 spec:
   updateStrategy:
     type: {{ .Values.cluster_manager.updateStrategy.type }}
@@ -45,6 +49,9 @@ spec:
         checksum/tls-configmap-lib-scripts: {{ include (print $.Template.BasePath "/configmap-lib-scripts.yaml") . | sha256sum }}
         checksum/tls-configmap-os: {{ include (print $.Template.BasePath "/configmap-os.yaml") . | sha256sum }}
         checksum/tls-configmap-scripts: {{ include (print $.Template.BasePath "/configmap-scripts.yaml") . | sha256sum }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 8 }}
+        {{- end }}
         {{- if .Values.cluster_manager.podAnnotations }}
         {{- include "common.tplvalues.render" (dict "value" .Values.cluster_manager.podAnnotations "context" $) | nindent 8 }}
         {{- end }}

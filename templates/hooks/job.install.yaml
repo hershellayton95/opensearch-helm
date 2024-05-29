@@ -27,12 +27,13 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
         app.kubernetes.io/component: securityadmin
-      {{- if $.Values.podAnnotations }}
-      annotations: {{- toYaml $.Values.podAnnotations | nindent 8 }}
+      annotations:
         {{- if .Values.commonAnnotations }}
         {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 8 }}
         {{- end }}
-      {{- end }}
+        {{- if .Values.securityadmin.podAnnotations }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.securityadmin.podAnnotations "context" $) | nindent 8 }}
+        {{- end }}
     spec:
       restartPolicy: Never
       {{- if $.Values.securityadmin.priorityClassName }}

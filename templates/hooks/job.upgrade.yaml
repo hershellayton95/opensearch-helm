@@ -23,11 +23,12 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
         app.kubernetes.io/component: s3-snapshots
-      {{- if $.Values.podAnnotations }}
-      annotations: {{- toYaml $.Values.podAnnotations | nindent 8 }}
-        {{- if .Values.commonAnnotations }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 8 }}
-        {{- end }}
+      annotations:
+      {{- if .Values.commonAnnotations }}
+      {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.s3Snapshots.podAnnotations }}
+      {{- include "common.tplvalues.render" (dict "value" .Values.s3Snapshots.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
     spec:
       restartPolicy: Never

@@ -2015,6 +2015,9 @@ securityadmin:
 s3Snapshots:
   ## @param s3Snapshots.enabled Enable Opensearch S3 snapshots
   enabled: false
+  ## @param securityadmin.podAnnotations Annotations to add to the pod
+  ##
+  podAnnotations: {}
   ## ref: https://opensearch.org/docs/latest/opensearch/snapshot-restore/#amazon-s3
   ##
   config:
