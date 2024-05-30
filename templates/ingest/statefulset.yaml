@@ -114,6 +114,11 @@ spec:
               {{- include "opensearch.sysctlIfLess" (dict "key" "fs.file-max" "value" "65536") | nindent 14 }}
           securityContext:
             privileged: true
+            {{- if .Values.sysctlImage.containerSecurityContext }}
+            runAsUser: {{ .Values.sysctlImage.containerSecurityContext.runAsUser }}
+            {{- else }}
+            runAsUser: 1001
+            {{- end }}
           {{- if .Values.sysctlImage.resources }}
           resources: {{- toYaml .Values.sysctlImage.resources | nindent 12 }}
           {{- end }}

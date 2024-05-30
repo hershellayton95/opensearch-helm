@@ -1655,6 +1655,12 @@ sysctlImage:
     ##    cpu: 100m
     ##    memory: 128Mi
     requests: {}
+  ## Container Security Context for the sysctl container.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  ## @param sysctlImage.containerSecurityContext.runAsUser User ID for the container for the sysctl container
+  ##
+  containerSecurityContext:
+    runAsUser: 1001
 
 ## @section VolumePermissions parameters
 
