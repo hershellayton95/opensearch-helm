@@ -98,7 +98,7 @@ security:
   monitoringPassword: ""
   ## @param security.existingSecret Name of the existing secret containing the Opensearch passwords
   ##
-  existingSecret: ""
+  existingSecret: "pippo"
 
   ## TLS configuration
   ##
